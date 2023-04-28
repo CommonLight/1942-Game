@@ -52,6 +52,20 @@
 		box-shadow: 5px 5px rgb(52, 83, 141);
 		border-radius: 15px;
 	}
+
+	#gameStatus{
+		font-size: 100pt;
+		color: rgb(28, 48, 85);
+		font-family: Arial, Helvetica, sans-serif;
+		font-weight: bolder;
+		font-style: italic;
+		opacity: 100%;
+		margin: 180px 0px 0px 120px;
+		position: absolute;
+		opacity: 0;
+	}
+
+	
 </style>
 
 
@@ -61,10 +75,10 @@
 	<div id='container'>
 		<div id='hero' style='top:300px; left:300px;'></div>
 		<div id='enemies'></div>
-		<div id='enemies2'></div>
-		<div id='bullets'></div>	
+		<div id='bullets'></div>
+		<div id="gameStatus">YOU LOSE!</div>
 	</div>
-
+	
 	<div id='score'>0</div>
 
 
@@ -113,7 +127,7 @@
 
 	function moveEnemies() {
 		for (var i=0; i<enemies.length; i++) {
-		enemies[i].y += .3;
+		enemies[i].y += .7;
 		if (enemies[i].y > 525) {
 			enemies[i].y = 0
 			enemies[i].x = Math.random()*950
@@ -162,6 +176,8 @@
 			}, 1000)
 			enemies.splice(j,1)
 			bullets.splice(i,1)
+			// document.getElementById('gameStatus').innerText = "YOU WIN!"
+			// winScreen.style.opacity = 100
 			}
 			}
 			}
@@ -175,6 +191,8 @@
 			var planeHitSound = new Audio("SFX/planeHit.wav")
 			planeHitSound.play()
 			heroCollided = true
+			var loseScreen = document.getElementById('gameStatus')
+			loseScreen.style.opacity = 100
 			}
 			}
 		}
@@ -204,17 +222,17 @@
 		document.getElementById('hero').style['left'] = hero.x + "px"
 	}
 	
-	var isLeftPressed = false
-	var isRightPressed = false
-	var isUpPressed = false
-	var isDownPressed = false
+	// var isLeftPressed = false
+	// var isRightPressed = false
+	// var isUpPressed = false
+	// var isDownPressed = false
 
 	document.onkeydown = function(moveHero) {
 		if (moveHero.keyCode == 37) { //MOVE LEFT
-			isLeftPressed = true
+			// isLeftPressed = true
 			hero.x -= 20
 		} else if (moveHero.keyCode == 39) { //MOVE RIGHT
-			isRightPressed = true
+			// isRightPressed = true
 			hero.x += 20
 		} else if (moveHero.keyCode == 38) { //MOVE UP
 			hero.y -= 20
